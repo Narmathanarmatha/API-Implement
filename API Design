@@ -1,0 +1,47 @@
+GET /doctors:
+
+Description: Returns a list of all doctors with basic information.
+Response:
+Array of objects, each containing doctor details like:
+id (integer) - Unique identifier for the doctor.
+name (string) - Full name of the doctor.
+specialization (string) - Doctor's area of expertise (optional).
+GET /doctors/{doctor_id}:
+
+Description: Returns detailed information about a specific doctor by their ID.
+Path Parameter:
+{doctor_id} (integer) - Unique identifier for the doctor.
+Response:
+Object containing detailed doctor information:
+id (integer) - Unique identifier for the doctor.
+name (string) - Full name of the doctor.
+specialization (string) - Doctor's area of expertise (optional).
+schedule (array of objects) - Weekly schedule details (optional). Each object can include:
+day_of_week (string) - Day of the week (e.g., "Monday", "Tuesday").
+start_time (string) - Time the doctor starts consultations (e.g., "17:00:00").
+end_time (string) - Time the doctor finishes consultations (e.g., "20:00:00").
+GET /doctors/{doctor_id}/availability:
+
+Description: Returns available appointment slots for a specific doctor within a given date range.
+Path Parameter:
+{doctor_id} (integer) - Unique identifier for the doctor.
+Query Parameters:
+start_date (string) - Start date of the search range in YYYY-MM-DD format (optional, defaults to current date).
+end_date (string) - End date of the search range in YYYY-MM-DD format (optional, defaults to 7 days from start_date).
+Response:
+Array of objects, each representing an available appointment slot:
+date (string) - Date of the appointment slot in YYYY-MM-DD format.
+time (string) - Time of the appointment slot in HH:MM:SS format.
+POST /appointments:
+
+Description: Creates a new appointment with a doctor.
+Request Body: (JSON format)
+patient_id (integer) - Unique identifier for the patient.
+doctor_id (integer) - Unique identifier for the doctor.
+desired_date_time (string) - Preferred date and time for the appointment in YYYY-MM-DD HH:MM:SS format.
+Response:
+Object containing details of the created appointment:
+id (integer) - Unique identifier for the appointment.
+patient_id (integer) - Unique identifier for the patient.
+doctor_id (integer) - Unique identifier for the doctor.
+date_time (string) - Date and time of the appointment in YYYY-MM-DD HH:MM:SS format.
